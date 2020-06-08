@@ -1,0 +1,88 @@
+﻿@model PromotionEngineCartApp.Models.SkuItemViewModel
+@{
+    ViewBag.Title = "Create Order";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create Order</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.PromotionItemVM.UnitA, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.TextBoxFor(model => model.PromotionVM.UnitA, new { @Value = (Model == null) ? "0" : Model.PromotionVM.UnitA.ToString(), htmlAttributes = new { @class = "form-control" } })*@
+                @*@Html.TextBoxFor(model => model.PromotionVM.UnitA, new { @Value = 0, htmlAttributes = new { @class = "form-control" } })*@
+                @*@Html.TextBoxFor(model => model.PromotionVM.UnitA, new { @Value = "0", @type = "hidden", htmlAttributes = new { @class = "form-control" } })*@
+                @Html.TextBoxFor(model => model.PromotionItemVM.UnitA, new { @Value = "0", htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PromotionItemVM.UnitA, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PromotionItemVM.UnitB, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.PromotionItemVM.UnitB, new { @Value = "0", htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PromotionItemVM.UnitB, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PromotionItemVM.UnitC, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.PromotionItemVM.UnitC, new { @Value = "0", htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PromotionItemVM.UnitC, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PromotionItemVM.UnitD, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.PromotionItemVM.UnitD, new { @Value = "0", htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PromotionItemVM.UnitD, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Submit" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+    <div class="form-horizontal">
+        @if (Model != null)
+        {
+            <h2>Order List for Checkout Process</h2>
+            <table class="list-group">
+                <tr>
+                    <th width="100px">
+                        Unit
+                    </th>
+                    <th>
+                        Promotion Price
+                    </th>
+                </tr>
+                @foreach (var skuProduct in Model.ResultSetVM.lstSkuItem)
+                {
+                    <tr>
+                        <td>
+                            @Html.Encode(skuProduct.Unit)
+                        </td>
+                        <td>
+                            @Html.Encode(skuProduct.Price)
+                        </td>
+                    </tr>
+                }
+            </table>
+            <br />
+        }
+        <p>
+            @Html.ActionLink("Back", "Index")
+        </p>
+    </div>
+}

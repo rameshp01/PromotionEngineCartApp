@@ -1,0 +1,41 @@
+﻿@model IEnumerable<PromotionEngineCartApp.Models.SkuItemModel>
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Actual Price List</h2>
+<div>
+    <table>
+        <tr>
+            <th width="100px">
+                Unit
+            </th>
+            <th>
+                Price
+            </th>
+        </tr>
+        @foreach (var skuProduct in Model)
+        {
+            <tr>
+                <td>
+                    @Html.Encode(skuProduct.Unit)
+                </td>
+                <td>
+                    @Html.Encode(skuProduct.Price)
+                </td>
+            </tr>
+        }
+    </table>
+    <br />
+    <div>
+        <h2>Active Promotions</h2>
+        <li>3 of A's for 130</li>
+        <li>2 of B's for 45</li>
+        <li>C & D for 30</li>
+    </div>
+    <br />
+    <p style="font-size:large">
+        @Html.ActionLink("Create Order", "CreateOrder")
+    </p>
+</div>
